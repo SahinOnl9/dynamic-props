@@ -1,0 +1,17 @@
+public static final String HYPHEN = "-";
+	public static final String SUB_TRANSACTION_ID = "%02d%02d-%02d%02d-%02d";
+
+	public String getTransactionId(String prefix) {
+		LocalDateTime timeObj = LocalDateTime.now();
+		int MM = timeObj.getMonthValue();
+		int DD = timeObj.getDayOfMonth();
+		int HH = timeObj.getHour();
+		int MN = timeObj.getMinute();
+		int SS = timeObj.getSecond();
+		String nano = String.valueOf(timeObj.getNano());
+		System.out.println(nano);
+		String NN = nano.substring(0, 2) + HYPHEN + nano.substring(2, 6);
+
+		String subTransactionId = String.format(SUB_TRANSACTION_ID, MM, DD, HH, MN, SS);
+		return prefix + HYPHEN + subTransactionId + NN;
+	}
